@@ -604,6 +604,10 @@ def _normalize_state_payload(device_id: str, payload: dict[str, Any]) -> dict[st
         "screenLock": "screenLock",
         # Device metadata from state feed (fix from moritzj29/a3f792d)
         "signalStrength": "wifiRSSI",
+        # Sauna Sensor (device type SaunaSensor): limits for the presence
+        # and low-battery binary sensors
+        "PIRThreshold": "PIRThreshold",
+        "batteryWarningThreshold": "batteryWarningThreshold",
     }
     for source, target in key_map.items():
         if source in state:
@@ -726,6 +730,11 @@ def _normalize_telemetry_payload(payload: dict[str, Any]) -> dict[str, Any]:
         # Additional real-time status fields
         "lightOn": "lightOn",
         "fanOn": "fanOn",
+        # Sauna Sensor (device type SaunaSensor), one frame per minute
+        "targetReached": "targetReached",
+        "presence": "presence",  # raw PIR level, compared to PIRThreshold
+        "batteryVoltage": "batteryVoltage",
+        "rssi": "wifiRSSI",  # also in the Fenix "ESP" sub-feed
     }
     for source, target in telemetry_map.items():
         if source in data:

@@ -81,9 +81,14 @@ Power, Light, Fan, Steamer, Aroma, Auto Light, Auto Fan, Dehumidifier, Device sc
 | WiFi signal | RSSI (diagnostic) |
 | Status codes | Device status (diagnostic) |
 | Relay counters | Phase 1/2/3, heater, steam cycle counters (diagnostic) |
+| Time to target | Harvia's own minutes-to-target estimate as reported, 0 once reached *(harvia.io)* |
+| Battery voltage | Battery voltage of the Sauna Sensor (diagnostic, *harvia.io*) |
+| Presence level | Raw presence (PIR) value of the Sauna Sensor (diagnostic, disabled by default, *harvia.io*) |
 
 ### Binary Sensors
 Door, Heating active, Steam active
+
+**Sauna Sensor** *(harvia.io, battery-powered device type `SaunaSensor`)*: Target reached, Occupancy (on while the presence value is at or above the device's `PIRThreshold`, 20 if not reported) and Battery (low at or below the device's `batteryWarningThreshold`, 8.5 V if not reported). Its `rssi` feeds *WiFi signal*. *Time to target* is shown even when Harvia does not run the heater (e.g. an external relay): *Time to ready* needs a session, which only starts when the device reports the heater on.
 
 ### Number Controls
 Target humidity, Aroma level, Session time *(Xenio; on Fenix a read-only sensor — see [Session time](#session-time))*

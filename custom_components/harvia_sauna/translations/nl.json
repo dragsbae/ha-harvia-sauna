@@ -192,6 +192,15 @@
       },
       "scheduled_start": {
         "name": "Apparaatschema"
+      },
+      "time_to_target": {
+        "name": "Tijd tot doeltemperatuur"
+      },
+      "presence": {
+        "name": "Aanwezigheidsniveau"
+      },
+      "battery_voltage": {
+        "name": "Batterijspanning"
       }
     },
     "binary_sensor": {
@@ -218,6 +227,15 @@
       },
       "cloud_connection": {
         "name": "Cloudverbinding"
+      },
+      "target_reached": {
+        "name": "Doeltemperatuur bereikt"
+      },
+      "occupancy": {
+        "name": "Bezetting"
+      },
+      "battery_low": {
+        "name": "Batterij"
       }
     },
     "number": {

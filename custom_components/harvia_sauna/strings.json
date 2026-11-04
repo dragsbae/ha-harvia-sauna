@@ -192,6 +192,15 @@
       },
       "scheduled_start": {
         "name": "Device schedule"
+      },
+      "time_to_target": {
+        "name": "Time to target"
+      },
+      "presence": {
+        "name": "Presence level"
+      },
+      "battery_voltage": {
+        "name": "Battery voltage"
       }
     },
     "binary_sensor": {
@@ -218,6 +227,15 @@
       },
       "cloud_connection": {
         "name": "Cloud connection"
+      },
+      "target_reached": {
+        "name": "Target reached"
+      },
+      "occupancy": {
+        "name": "Occupancy"
+      },
+      "battery_low": {
+        "name": "Battery"
       }
     },
     "number": {

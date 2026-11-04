@@ -192,6 +192,15 @@
       },
       "scheduled_start": {
         "name": "Seadme ajakava"
+      },
+      "time_to_target": {
+        "name": "Aeg sihttemperatuurini"
+      },
+      "presence": {
+        "name": "Kohaloleku tase"
+      },
+      "battery_voltage": {
+        "name": "Aku pinge"
       }
     },
     "binary_sensor": {
@@ -218,6 +227,15 @@
       },
       "cloud_connection": {
         "name": "Pilveühendus"
+      },
+      "target_reached": {
+        "name": "Sihttemperatuur saavutatud"
+      },
+      "occupancy": {
+        "name": "Hõivatus"
+      },
+      "battery_low": {
+        "name": "Aku"
       }
     },
     "number": {

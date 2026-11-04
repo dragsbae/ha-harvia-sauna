@@ -165,11 +165,12 @@ class HarviaIoWebSocketManager:
             
             # Normalize telemetry to match coordinator expectations
             normalized = _normalize_telemetry_payload(telemetry_payload)
-            if not set(normalized) - {"timestamp", "type"}:
+            if not set(normalized) - {"timestamp", "type", "wifiRSSI"}:
                 # No measurement in it, e.g. the "ESP" sub-feed (heapSize,
                 # rssi). It still shows the device is alive, but its
                 # timestamp must not count as the latest telemetry frame: a
                 # polled cabin frame older than it would be skipped as stale.
+                # Its rssi (-> wifiRSSI) is device metadata, not a measurement.
                 normalized.pop("timestamp", None)
             _LOGGER.debug("Normalized measurement for %s: %s", device_id, normalized)
 

@@ -192,6 +192,15 @@
       },
       "scheduled_start": {
         "name": "Laitteen ajastus"
+      },
+      "time_to_target": {
+        "name": "Aika tavoitelämpötilaan"
+      },
+      "presence": {
+        "name": "Läsnäolotaso"
+      },
+      "battery_voltage": {
+        "name": "Akun jännite"
       }
     },
     "binary_sensor": {
@@ -218,6 +227,15 @@
       },
       "cloud_connection": {
         "name": "Pilviyhteys"
+      },
+      "target_reached": {
+        "name": "Tavoitelämpötila saavutettu"
+      },
+      "occupancy": {
+        "name": "Läsnäolo"
+      },
+      "battery_low": {
+        "name": "Akku"
       }
     },
     "number": {

@@ -192,6 +192,15 @@
       },
       "scheduled_start": {
         "name": "기기 예약"
+      },
+      "time_to_target": {
+        "name": "목표 온도까지 남은 시간"
+      },
+      "presence": {
+        "name": "재실 감지 수준"
+      },
+      "battery_voltage": {
+        "name": "배터리 전압"
       }
     },
     "binary_sensor": {
@@ -218,6 +227,15 @@
       },
       "cloud_connection": {
         "name": "클라우드 연결"
+      },
+      "target_reached": {
+        "name": "목표 온도 도달"
+      },
+      "occupancy": {
+        "name": "재실"
+      },
+      "battery_low": {
+        "name": "배터리"
       }
     },
     "number": {

@@ -192,6 +192,15 @@
       },
       "scheduled_start": {
         "name": "本体スケジュール"
+      },
+      "time_to_target": {
+        "name": "設定温度までの時間"
+      },
+      "presence": {
+        "name": "在室レベル"
+      },
+      "battery_voltage": {
+        "name": "バッテリー電圧"
       }
     },
     "binary_sensor": {
@@ -218,6 +227,15 @@
       },
       "cloud_connection": {
         "name": "クラウド接続"
+      },
+      "target_reached": {
+        "name": "設定温度に到達"
+      },
+      "occupancy": {
+        "name": "在室"
+      },
+      "battery_low": {
+        "name": "バッテリー"
       }
     },
     "number": {

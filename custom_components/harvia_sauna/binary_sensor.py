@@ -17,7 +17,12 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .const import API_PROVIDER_HARVIAIO, API_PROVIDER_MYHARVIA, CONF_API_PROVIDER, DOMAIN
-from .coordinator import HarviaDeviceData, HarviaSaunaCoordinator
+from .coordinator import (
+    HarviaDeviceData,
+    HarviaSaunaCoordinator,
+    battery_low,
+    presence_detected,
+)
 from .entity import HarviaBaseEntity
 
 _LOGGER = logging.getLogger(__name__)
@@ -89,6 +94,29 @@ BINARY_SENSOR_DESCRIPTIONS: list[HarviaBinarySensorDescription] = [
         entity_category=EntityCategory.DIAGNOSTIC,
         providers=(API_PROVIDER_HARVIAIO,),
         value_fn=lambda d: d.remote_allowed,
+    ),
+    # Sauna Sensor (harvia.io device type SaunaSensor)
+    HarviaBinarySensorDescription(
+        key="target_reached",
+        translation_key="target_reached",
+        icon="mdi:thermometer-check",
+        providers=(API_PROVIDER_HARVIAIO,),
+        value_fn=lambda d: d.target_reached,
+    ),
+    HarviaBinarySensorDescription(
+        key="occupancy",
+        translation_key="occupancy",
+        device_class=BinarySensorDeviceClass.OCCUPANCY,
+        providers=(API_PROVIDER_HARVIAIO,),
+        value_fn=presence_detected,
+    ),
+    HarviaBinarySensorDescription(
+        key="battery_low",
+        translation_key="battery_low",
+        device_class=BinarySensorDeviceClass.BATTERY,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        providers=(API_PROVIDER_HARVIAIO,),
+        value_fn=battery_low,
     ),
 ]
 

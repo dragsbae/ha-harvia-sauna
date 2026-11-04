@@ -192,6 +192,15 @@
       },
       "scheduled_start": {
         "name": "设备计划"
+      },
+      "time_to_target": {
+        "name": "距目标温度时间"
+      },
+      "presence": {
+        "name": "人体感应值"
+      },
+      "battery_voltage": {
+        "name": "电池电压"
       }
     },
     "binary_sensor": {
@@ -218,6 +227,15 @@
       },
       "cloud_connection": {
         "name": "云连接"
+      },
+      "target_reached": {
+        "name": "已达目标温度"
+      },
+      "occupancy": {
+        "name": "占用"
+      },
+      "battery_low": {
+        "name": "电池"
       }
     },
     "number": {

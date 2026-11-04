@@ -192,6 +192,15 @@
       },
       "scheduled_start": {
         "name": "Programmazione dispositivo"
+      },
+      "time_to_target": {
+        "name": "Tempo alla temperatura target"
+      },
+      "presence": {
+        "name": "Livello di presenza"
+      },
+      "battery_voltage": {
+        "name": "Tensione batteria"
       }
     },
     "binary_sensor": {
@@ -218,6 +227,15 @@
       },
       "cloud_connection": {
         "name": "Connessione cloud"
+      },
+      "target_reached": {
+        "name": "Temperatura target raggiunta"
+      },
+      "occupancy": {
+        "name": "Occupazione"
+      },
+      "battery_low": {
+        "name": "Batteria"
       }
     },
     "number": {

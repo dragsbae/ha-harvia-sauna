@@ -192,6 +192,15 @@
       },
       "scheduled_start": {
         "name": "Enhetsschema"
+      },
+      "time_to_target": {
+        "name": "Tid till måltemperatur"
+      },
+      "presence": {
+        "name": "Närvaronivå"
+      },
+      "battery_voltage": {
+        "name": "Batterispänning"
       }
     },
     "binary_sensor": {
@@ -218,6 +227,15 @@
       },
       "cloud_connection": {
         "name": "Molnanslutning"
+      },
+      "target_reached": {
+        "name": "Måltemperatur nådd"
+      },
+      "occupancy": {
+        "name": "Närvaro"
+      },
+      "battery_low": {
+        "name": "Batteri"
       }
     },
     "number": {

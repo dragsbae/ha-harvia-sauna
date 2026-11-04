@@ -121,6 +121,13 @@ async def async_get_config_entry_diagnostics(
                 "last_session_max_temp": device.last_session_max_temp,
                 "sessions_today": device.sessions_today,
                 "temp_trend": device.temp_trend,
+                # Sauna Sensor (harvia.io device type SaunaSensor)
+                "reported_time_to_target": device.reported_time_to_target,
+                "target_reached": device.target_reached,
+                "presence": device.presence,
+                "pir_threshold": device.pir_threshold,
+                "battery_voltage": device.battery_voltage,
+                "battery_warning_threshold": device.battery_warning_threshold,
             }
 
     # Raw API payloads (Fenix/harvia.io client buffers these) — lets users

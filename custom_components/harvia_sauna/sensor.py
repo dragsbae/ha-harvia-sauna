@@ -17,6 +17,7 @@ from homeassistant.const import (
     PERCENTAGE,
     SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
     EntityCategory,
+    UnitOfElectricPotential,
     UnitOfEnergy,
     UnitOfPower,
     UnitOfTemperature,
@@ -372,6 +373,40 @@ SENSOR_DESCRIPTIONS: list[HarviaSensorDescription] = [
         value_fn=lambda d: (
             (d.profiles or {}).get(str(d.active_profile)) or {}
         ).get("duration"),
+    ),
+    # Sauna Sensor (harvia.io device type SaunaSensor). Harvia's own
+    # estimate as reported - also while Harvia does not run the heater, when
+    # time_to_ready stays unknown because no session starts.
+    HarviaSensorDescription(
+        key="time_to_target",
+        translation_key="time_to_target",
+        native_unit_of_measurement=UnitOfTime.MINUTES,
+        device_class=SensorDeviceClass.DURATION,
+        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:timer-sand",
+        providers=(API_PROVIDER_HARVIAIO,),
+        value_fn=lambda d: d.reported_time_to_target,
+    ),
+    HarviaSensorDescription(
+        key="presence",
+        translation_key="presence",
+        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:motion-sensor",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        entity_registry_enabled_default=False,
+        providers=(API_PROVIDER_HARVIAIO,),
+        value_fn=lambda d: d.presence,
+    ),
+    HarviaSensorDescription(
+        key="battery_voltage",
+        translation_key="battery_voltage",
+        native_unit_of_measurement=UnitOfElectricPotential.VOLT,
+        device_class=SensorDeviceClass.VOLTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:battery",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        providers=(API_PROVIDER_HARVIAIO,),
+        value_fn=lambda d: d.battery_voltage,
     ),
     # Session tracking
     HarviaSensorDescription(

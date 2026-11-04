@@ -192,6 +192,15 @@
       },
       "scheduled_start": {
         "name": "Készülék ütemezés"
+      },
+      "time_to_target": {
+        "name": "Idő a célhőmérsékletig"
+      },
+      "presence": {
+        "name": "Jelenlét szintje"
+      },
+      "battery_voltage": {
+        "name": "Akkumulátor feszültsége"
       }
     },
     "binary_sensor": {
@@ -218,6 +227,15 @@
       },
       "cloud_connection": {
         "name": "Felhőkapcsolat"
+      },
+      "target_reached": {
+        "name": "Célhőmérséklet elérve"
+      },
+      "occupancy": {
+        "name": "Foglaltság"
+      },
+      "battery_low": {
+        "name": "Akkumulátor"
       }
     },
     "number": {

@@ -192,6 +192,15 @@
       },
       "scheduled_start": {
         "name": "Plán zařízení"
+      },
+      "time_to_target": {
+        "name": "Čas do cílové teploty"
+      },
+      "presence": {
+        "name": "Úroveň přítomnosti"
+      },
+      "battery_voltage": {
+        "name": "Napětí baterie"
       }
     },
     "binary_sensor": {
@@ -218,6 +227,15 @@
       },
       "cloud_connection": {
         "name": "Cloudové připojení"
+      },
+      "target_reached": {
+        "name": "Cílová teplota dosažena"
+      },
+      "occupancy": {
+        "name": "Obsazenost"
+      },
+      "battery_low": {
+        "name": "Baterie"
       }
     },
     "number": {

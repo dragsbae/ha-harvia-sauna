@@ -55,6 +55,8 @@ from .const import (
     POLL_FAILURES_BEFORE_UNAVAILABLE,
     STATE_RECHECK_DELAY,
     FENIX_SAUNA_STATUS_SCHEDULED,
+    SAUNA_SENSOR_DEFAULT_BATTERY_WARNING_V,
+    SAUNA_SENSOR_DEFAULT_PIR_THRESHOLD,
     SCAN_INTERVAL_FALLBACK,
     WS_STOP_TIMEOUT,
     STATUS_BIT_DOOR,
@@ -345,6 +347,17 @@ class HarviaDeviceData:
     remote_allowed: bool = False  # From state["remoteAllowed"]
     demo_mode: bool = False  # From state["demoMode"]
     screen_lock: bool = False  # From state["screenLock"]["on"]
+
+    # Sauna Sensor (harvia.io device type SaunaSensor). None = not reported.
+    # Harvia's own minutes-to-target as reported, whatever the run state.
+    # time_to_target_min keeps it only while the heater is on (device.active),
+    # which a heater switched by an external relay never reports.
+    reported_time_to_target: float | None = None  # telemetry["timeToTarget"]
+    target_reached: bool | None = None  # From telemetry["targetReached"]
+    presence: float | None = None  # From telemetry["presence"] (raw PIR level)
+    battery_voltage: float | None = None  # From telemetry["batteryVoltage"]
+    pir_threshold: float | None = None  # From state["PIRThreshold"]
+    battery_warning_threshold: float | None = None  # state["batteryWarningThreshold"]
 
     # Temperature trend (°C/min)
     _temp_history: deque = field(
@@ -1026,6 +1039,17 @@ def _to_bool(value: Any) -> bool:
     return bool(value)
 
 
+def _finite_number(value: Any) -> int | float | None:
+    """Return a finite int/float reading unchanged, anything else as None."""
+    if (
+        isinstance(value, (int, float))
+        and not isinstance(value, bool)
+        and math.isfinite(value)
+    ):
+        return value
+    return None
+
+
 def _reconcile_scheduled_wait(device: HarviaDeviceData) -> None:
     """Do not show a Fenix sauna as on/heating while it only waits for a schedule.
 
@@ -1104,6 +1128,30 @@ def estimated_heater_power_w(device: HarviaDeviceData) -> int:
             heating = bits & STATUS_BIT_HEAT_DEMAND and not bits & STATUS_BIT_TARGET_REACHED
             return device.heater_power if heating else 0
     return device.heater_power if device.heat_on else 0
+
+
+def presence_detected(device: HarviaDeviceData) -> bool | None:
+    """Sauna Sensor: presence at or above the device's own PIRThreshold."""
+    if device.presence is None:
+        return None
+    threshold = (
+        device.pir_threshold
+        if device.pir_threshold is not None
+        else SAUNA_SENSOR_DEFAULT_PIR_THRESHOLD
+    )
+    return device.presence >= threshold
+
+
+def battery_low(device: HarviaDeviceData) -> bool | None:
+    """Sauna Sensor: battery at or below the device's batteryWarningThreshold."""
+    if device.battery_voltage is None:
+        return None
+    threshold = (
+        device.battery_warning_threshold
+        if device.battery_warning_threshold is not None
+        else SAUNA_SENSOR_DEFAULT_BATTERY_WARNING_V
+    )
+    return device.battery_voltage <= threshold
 
 
 def _accumulate_energy(device: HarviaDeviceData, now: float | None = None) -> None:
@@ -1210,6 +1258,12 @@ def _apply_state_data(device: HarviaDeviceData, data: dict[str, Any]) -> None:
 
     if "wifiRSSI" in data:  # Fenix state: signalStrength (api_harviaio)
         device.wifi_rssi = data["wifiRSSI"]
+    if "PIRThreshold" in data:  # Sauna Sensor
+        device.pir_threshold = _finite_number(data["PIRThreshold"])
+    if "batteryWarningThreshold" in data:  # Sauna Sensor
+        device.battery_warning_threshold = _finite_number(
+            data["batteryWarningThreshold"]
+        )
 
     device._last_update = time.monotonic()
     _reconcile_scheduled_wait(device)
@@ -1294,6 +1348,20 @@ def _apply_telemetry_data(device: HarviaDeviceData, data: dict[str, Any]) -> Non
         device.lights_on = bool(data["lightOn"])
     if "fanOn" in data:
         device.fan_on = bool(data["fanOn"])
+
+    # Sauna Sensor (device type SaunaSensor)
+    if "timeToTarget" in data:
+        value = _finite_number(data["timeToTarget"])
+        device.reported_time_to_target = (
+            float(value) if value is not None and value >= 0 else None
+        )
+    if "targetReached" in data:
+        value = data["targetReached"]
+        device.target_reached = None if value is None else _to_bool(value)
+    if "presence" in data:
+        device.presence = _finite_number(data["presence"])
+    if "batteryVoltage" in data:
+        device.battery_voltage = _finite_number(data["batteryVoltage"])
 
     device._last_update = time.monotonic()
     _reconcile_scheduled_wait(device)

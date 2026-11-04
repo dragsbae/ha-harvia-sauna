@@ -192,6 +192,15 @@
       },
       "scheduled_start": {
         "name": "Harmonogram urządzenia"
+      },
+      "time_to_target": {
+        "name": "Czas do temperatury docelowej"
+      },
+      "presence": {
+        "name": "Poziom obecności"
+      },
+      "battery_voltage": {
+        "name": "Napięcie baterii"
       }
     },
     "binary_sensor": {
@@ -218,6 +227,15 @@
       },
       "cloud_connection": {
         "name": "Połączenie z chmurą"
+      },
+      "target_reached": {
+        "name": "Temperatura docelowa osiągnięta"
+      },
+      "occupancy": {
+        "name": "Obecność"
+      },
+      "battery_low": {
+        "name": "Bateria"
       }
     },
     "number": {

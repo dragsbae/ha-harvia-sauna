@@ -183,6 +183,12 @@ STATUS_BIT_STOPPED = 1 << 18      # session stopped / interrupted; persists unti
 FENIX_SAUNA_STATUS_IDLE = 0
 FENIX_SAUNA_STATUS_HEATING = 1
 FENIX_SAUNA_STATUS_SCHEDULED = 5
+# Harvia Sauna Sensor (harvia.io device type "SaunaSensor", battery powered).
+# Its reported state carries PIRThreshold and batteryWarningThreshold; these
+# are the values one unit reported (firmware 3.0.130), used only when the
+# state has not delivered them (yet).
+SAUNA_SENSOR_DEFAULT_PIR_THRESHOLD = 20
+SAUNA_SENSOR_DEFAULT_BATTERY_WARNING_V = 8.5
 
 STATUS_BITS_KNOWN = {1: "door_open", 5: "target_reached", 8: "heat_demand",
                      11: "light", 16: "ready_aux", 17: "session_active",

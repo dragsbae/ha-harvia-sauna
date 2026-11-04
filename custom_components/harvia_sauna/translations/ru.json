@@ -192,6 +192,15 @@
       },
       "scheduled_start": {
         "name": "Расписание устройства"
+      },
+      "time_to_target": {
+        "name": "Время до целевой температуры"
+      },
+      "presence": {
+        "name": "Уровень присутствия"
+      },
+      "battery_voltage": {
+        "name": "Напряжение батареи"
       }
     },
     "binary_sensor": {
@@ -218,6 +227,15 @@
       },
       "cloud_connection": {
         "name": "Облачное соединение"
+      },
+      "target_reached": {
+        "name": "Целевая температура достигнута"
+      },
+      "occupancy": {
+        "name": "Присутствие"
+      },
+      "battery_low": {
+        "name": "Батарея"
       }
     },
     "number": {

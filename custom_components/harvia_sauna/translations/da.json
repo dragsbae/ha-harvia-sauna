@@ -192,6 +192,15 @@
       },
       "scheduled_start": {
         "name": "Enhedsplan"
+      },
+      "time_to_target": {
+        "name": "Tid til måltemperatur"
+      },
+      "presence": {
+        "name": "Tilstedeværelsesniveau"
+      },
+      "battery_voltage": {
+        "name": "Batterispænding"
       }
     },
     "binary_sensor": {
@@ -218,6 +227,15 @@
       },
       "cloud_connection": {
         "name": "Cloud-forbindelse"
+      },
+      "target_reached": {
+        "name": "Måltemperatur nået"
+      },
+      "occupancy": {
+        "name": "Tilstedeværelse"
+      },
+      "battery_low": {
+        "name": "Batteri"
       }
     },
     "number": {
